@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="401px" preserveAspectRatio="none" style="width:381px;height:401px;background:#FFFFFF;" version="1.1" viewBox="0 0 381 401" width="381px" zoomAndPan="magnify"><defs/><g><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="38" x="41" y="16.6016">bridge</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="58" x="21" y="30.7344">0.0.0.0/0</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="56" x="23" y="146.6445">front-end</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="74" x="5" y="160.7773">10.0.0.0/24</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="57" x="22" y="276.6875">back-end</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="74" x="5" y="290.8203">10.0.1.0/24</text><rect fill="#E2E2F0" height="5" style="stroke:#181818;stroke-width:1.0;" width="186" x="84" y="16.6328"/><rect fill="#E2E2F0" height="5" style="stroke:#181818;stroke-width:1.0;" width="289" x="84" y="146.6758"/><rect fill="#E2E2F0" height="5" style="stroke:#181818;stroke-width:1.0;" width="289" x="84" y="276.7188"/><path d="M130,21.6328 L130,64.5879 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="17" x="121.5" y="44.7676">:80</text><path d="M130,98.7207 L130,146.6758 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="51" x="104.5" y="126.8555">10.0.0.10</text><path d="M223,21.6328 L223,64.5879 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="31" x="207.5" y="44.7676">:8080</text><path d="M219,98.7207 L219,143.6758 A4,4 0 0 1 219,155.6758 L219,276.7188 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="51" x="193.5" y="256.8984">10.0.1.11</text><path d="M126,151.6758 L126,194.6309 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="68" x="92" y="174.8105">gochat:5000</text><path d="M319.5,151.6758 L319.5,194.6309 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="79" x="280" y="174.8105">php-fpm:9000</text><path d="M319.5,228.7637 L319.5,276.7188 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="51" x="294" y="256.8984">10.0.1.10</text><path d="M130,281.7188 L130,318.1963 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="45" x="107.5" y="301.6147">db:3306</text><rect fill="#F1F1F1" height="34.1328" style="stroke:#181818;stroke-width:0.5;" width="51" x="102.5" y="64.5879"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="31" x="112.5" y="86.1895">nginx</text><rect fill="#F1F1F1" height="34.1328" style="stroke:#181818;stroke-width:0.5;" width="68" x="187" y="64.5879"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="48" x="197" y="86.1895">adminer</text><rect fill="#F1F1F1" height="34.1328" style="stroke:#181818;stroke-width:0.5;" width="58" x="99" y="194.6309"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="38" x="109" y="216.2324">gochat</text><rect fill="#F1F1F1" height="34.1328" style="stroke:#181818;stroke-width:0.5;" width="73" x="285" y="194.6309"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="53" x="295" y="216.2324">php-fpm</text><rect fill="#F1F1F1" height="34.1328" style="stroke:#181818;stroke-width:0.5;" width="36" x="110" y="318.1963"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="16" x="120" y="339.7979">db</text><!--MD5=[114aa4afb1bfef4f078b48fd9b783216]
+@startuml network
+
+nwdiag {
+    network bridge {
+        address = "0.0.0.0/0";
+        nginx [address = ":80"];
+        adminer [address = ":8080"];
+    }
+    network front-end {
+        address = "10.0.0.0/24";
+        nginx [address = "10.0.0.10"];
+        gochat [address = "gochat:5000"];
+        php-fpm [address = "php-fpm:9000"];
+    }
+    network back-end {
+        address = "10.0.1.0/24";
+        php-fpm [address = "10.0.1.10"];
+        adminer [address = "10.0.1.11"];
+        db [address = "db:3306"];
+    }
+}
+
+@enduml
+
+PlantUML version 1.2022.7(Tue Aug 23 02:01:30 JST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: JP
+--></g></svg>

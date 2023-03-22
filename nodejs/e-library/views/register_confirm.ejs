@@ -1,0 +1,23 @@
+<%# ユーザ登録完了画面 %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>登録完了</title>
+  </head>
+  <body>
+    <h2><%= user_name; %>の登録が完了しました</h2>
+    <div>
+    <input type="button" id="back-to-top" value="トップへ戻る" />
+    </div>
+    <script>
+      window.onload = () => {
+        document.getElementById('back-to-top').onclick = () => {
+          // alert('clicked')
+          // hrefは遷移後に戻るボタンで戻れる
+          window.location.href = '/'
+        }
+      }
+    </script>
+  </body>
+</html>

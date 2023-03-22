@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <%# TODO CSS埋め込み %>
+    <title>Login</title>
+  </head>
+  <body>
+      <h2>Login</h2>
+        <form method="POST" action="/login_confirm">
+          <%# TODO 入力項目のvalidation(client/server共に) %>
+          <div>
+            <label for="login_name">ユーザ名</label>
+            <input type="text" id="login_name" name="user_name" value="" />
+          </div>
+          <div>
+            <label for="login_password">パスワード</label>
+            <input type="text" id="login_password" name="password" value="" />
+          </div>
+          <div>
+            <input type="submit" value="ログイン" />
+          </div>
+        </form>
+          <div>
+            <input type="button" id="register" value="新規登録はこちら" />
+          </div>
+    <!-- <script type="text/javascript" src="/public/button.js"></script>-->
+    <script>
+      window.addEventListener('DOMContentLoaded', event => {
+        document.getElementById('register').onclick = () => {
+          window.location.href = '/register'
+        }
+      })
+    </script>
+  </body>
+</html>

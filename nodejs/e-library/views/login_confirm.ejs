@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Shakaiの窓</title>
+  </head>
+  <body>
+    <%# TODO cookie無効ならloginページへ %>
+    <div><%= user_name %></div>
+    <div>
+      <input type="button" id="logout" value="ログアウト" />
+    </div>
+    <script>
+          window.onload = () => {
+            document.getElementById('logout').onclick = () => {
+              // cookie削除
+              window.location.href = '/'
+            }
+          }
+    </script>
+  </body>
+</html>

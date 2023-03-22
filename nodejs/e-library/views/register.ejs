@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <%# TODO CSS埋め込み %>
+    <title>Login</title>
+  </head>
+  <body>
+      <h2>会員登録</h2>
+        <form method="POST" action="/register_confirm">
+          <div>
+            <label for="register_name">ユーザ名</label>
+            <input id="register_name" type="text" name="user_name"/>
+          </div>
+          <div>
+            <label for="register_password">パスワード</label>
+            <input id="register_password" type="text" name="password"/>
+          </div>
+          <div>
+            <input type="submit" value="登録">        
+          </div>
+        </form>
+    <!-- <script type="text/javascript" src="/public/button.js"></script> -->
+  </body>
+</html>

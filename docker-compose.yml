@@ -1,0 +1,79 @@
+version: "3"
+services:
+  nginx:
+    build:
+      context: ./nginx
+    volumes:
+      - ./html:/usr/share/nginx/html
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    ports:
+      - "80:80"
+    depends_on:
+      - php-fpm
+    networks:
+      - front-end
+
+  php-fpm:
+    build:
+      context: ./php-fpm
+    volumes:
+      - ./php-fpm/php7.2.ini:/usr/local/etc/php/conf.d/php.ini
+      - ./html:/usr/share/nginx/html
+    environment:
+      SLACK_CHANNEL_ID: "${SLACK_CHANNEL_ID}"
+      SLACK_APP_TOKEN: "${SLACK_APP_TOKEN}"
+    expose:
+      - "9000"
+    depends_on:
+      - gochat
+    networks:
+      - front-end
+      - back-end
+
+  gochat:
+    build:
+      context: ./nodejs/gochat
+    volumes:
+      - ./nodejs/gochat/server.js:/usr/src/app/server.js
+    command: npm start
+    ports:
+      - "5000:5000"
+    networks:
+      - front-end
+    
+  db-gochat:
+    build:
+      context: ./db/gochat
+    volumes:
+      - dbdata-gochat:/var/lib/mysql
+      - ./db/gochat/my.cnf:/etc/mysql/my.cnf
+      - ./db/gochat/initdb.d:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_DATABASE: "gochat"
+      MYSQL_USER: "user1"
+      MYSQL_PASSWORD: "password1"
+      MYSQL_ROOT_HOST: localhost
+      MYSQL_RANDOM_ROOT_PASSWORD: yes
+      TZ: "Asia/Tokyo"
+    expose:
+      - "3306"
+    networks:
+      - back-end
+    # restart: always
+
+  adminer:
+    image: adminer:4
+    ports:
+      - 8080:8080
+    networks:
+      - back-end
+    # restart: always
+
+networks:
+  front-end:
+    driver: bridge
+  back-end:
+    driver: bridge
+
+volumes:
+  dbdata-gochat:

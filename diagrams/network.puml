@@ -1,0 +1,25 @@
+@startuml network
+
+nwdiag {
+    network bridge {
+        address = "0.0.0.0/0";
+        nginx [address = ":80"];
+        adminer [address = ":8080"];
+    }
+    network front-end {
+        address = "";
+        nginx [address = ""];
+        gochat [address = "gochat:5000"];
+        e-library [address = "gochat:5001"];
+        php-fpm [address = "php-fpm:9000"];
+    }
+    network back-end {
+        address = "";
+        php-fpm [address = ""];
+        adminer [address = ""];
+        e-library [address = ""];
+        db [address = "db:3306"];
+    }
+}
+
+@enduml
