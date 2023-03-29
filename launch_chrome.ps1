@@ -1,0 +1,2 @@
+ Start-Process -FilePath 'C:\Program Files\Google\Chrome\Application\chrome.exe' -ArgumentList '--user-data-dir=C:\temp\data1', '--window-size="800,960"', 'http://badchat.example.com/'
+ Start-Process -FilePath 'C:\Program Files\Google\Chrome\Application\chrome.exe' -ArgumentList '--user-data-dir=C:\temp\data2', '--window-size="800,960"', 'http://badchat.example.com/'

@@ -1,0 +1,2 @@
+GRANT ALL PRIVILEGES ON bad-library.* TO 'user1'@'%';
+-- FLUSH PRIVILEGES;

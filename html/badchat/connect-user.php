@@ -1,5 +1,5 @@
 <?php
-$dsn = 'mysql:dbname=gochat;host=db';
+$dsn = 'mysql:dbname=badchat;host=badchat-db';
 $user = 'user1';
 $password = 'password1';
 

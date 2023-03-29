@@ -1,8 +1,8 @@
 <?php
 session_start();
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-    header("location: login.php");
-    exit;
+if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+  header("location: login.php");
+  exit;
 }
 ?>
 
@@ -16,9 +16,9 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
 <body>
   ようこそ <span id="name">
-    <?php 
+    <?php
     // echo $_SESSION['name']; 
-    echo $_GET['name']; 
+    echo $_GET['name'];
     ?>
   </span> さん
   <div id="out"></div>
@@ -29,25 +29,38 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     const msg = document.getElementById("msg");
     const btn = document.getElementById("btn");
     const user_name = document.getElementById("name").textContent;
-    const sock = new WebSocket("ws://127.0.0.1:5000/");
-    sock.addEventListener("open", (e) => {
-      console.log("Connected.");
-    });
-    sock.addEventListener("close", (e) => {
-      console.log("Closed.");
-    });
-    sock.addEventListener("error", (e) => {
-      console.log("Error.");
-    });
+
+    // websocket client側の設定
+    const sock = new WebSocket("ws://badchat.ws.example.com/");
+    // const sock = new WebSocket("ws://127.0.0.1:5000/");
     sock.addEventListener("message", (e) => {
       out.innerText += `${e.data}`;
       msg.value = "";
       msg.focus();
     });
+    sock.addEventListener("open", (e) => {
+      console.log("Connected.");
+    });
+    sock.addEventListener("close", (e) => {
+      console.log("Closed.");
+      location.href = '/logout.php';
+    });
+    sock.addEventListener("error", (e) => {
+      console.log("Error.");
+    });
+
+    // 送信ボタン
     btn.addEventListener("click", (e) => {
       sock.send(`${user_name}: ${msg.value}`);
     });
+    
+    // ping(nginxのtimeout対策)
+    setInterval(() => {
+      sock.send('ping');
+    }, 30 * 1000); // ms
+    
     msg.focus();
+
   </script>
 </body>
 

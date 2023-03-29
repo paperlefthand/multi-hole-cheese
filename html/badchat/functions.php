@@ -30,6 +30,7 @@ function validation($datas, $confirm = true)
     } else if (!preg_match('/\A[a-z\d]{5,100}+\z/i', $datas["password"])) {
         $errors['password'] = "Please set a password with at least 5 characters.";
     }
+
     // //パスワード入力確認チェック（ユーザー新規登録時のみ使用）
     // if($confirm){
     //     if(empty($datas["confirm_password"])){

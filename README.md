@@ -10,22 +10,29 @@
 - windows: `C:\Windows\System32\drivers\etc\hosts`
 
 ```
-127.0.0.1 gochat.example.com
-127.0.0.1 trap.gochat.example.com
+127.0.0.1 badchat.example.com
+127.0.0.1 badchat.ws.example.com
+127.0.0.1 badchat.trap.example.com
 ```
 
-## gochat
+## badchat
 
 チャットアプリと罠サイト
 
 - XSS
-- `http://localhost/gochat.php?name=%3Cscript%3Ealert(document.cookie)%3C/script%3E`
+- `http://badchat.example.com?name=%3Cscript%3Ealert(document.cookie)%3C/script%3E`
 
-## e-library
+<!-- ## bad-library
 
 電子書籍の貸出管理
 
 - SQLi
+
+## bad-channel
+
+オンライン掲示板
+
+- XSS -->
 
 ## testing
 

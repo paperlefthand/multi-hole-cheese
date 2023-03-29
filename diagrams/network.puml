@@ -3,22 +3,23 @@
 nwdiag {
     network bridge {
         address = "0.0.0.0/0";
-        nginx [address = ":80"];
-        adminer [address = ":8080"];
+        nginx [address = "localhost:80"];
+        adminer [address = "localhost:8080"];
     }
     network front-end {
         address = "";
         nginx [address = ""];
-        gochat [address = "gochat:5000"];
-        e-library [address = "gochat:5001"];
+        badchat-ws [address = "badchat-ws:5000"];
+        bad-library-app [address = "bad-library-app:5001"];
         php-fpm [address = "php-fpm:9000"];
     }
     network back-end {
         address = "";
         php-fpm [address = ""];
         adminer [address = ""];
-        e-library [address = ""];
-        db [address = "db:3306"];
+        bad-library-app [address = ""];
+        badchat-db [address = "badchat-db:3306"];
+        bad-library-db [address = "bad-library-db:5432"];
     }
 }
 
