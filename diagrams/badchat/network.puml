@@ -9,17 +9,14 @@ nwdiag {
     network front-end {
         address = "";
         nginx [address = ""];
-        badchat-ws [address = "badchat-ws:5000"];
-        bad-library-app [address = "bad-library-app:5001"];
+        ws [address = "ws:5000"];
         php-fpm [address = "php-fpm:9000"];
     }
     network back-end {
         address = "";
         php-fpm [address = ""];
         adminer [address = ""];
-        bad-library-app [address = ""];
-        badchat-db [address = "badchat-db:3306"];
-        bad-library-db [address = "bad-library-db:5432"];
+        db [address = "db:3306"];
     }
 }
 

@@ -1,8 +1,10 @@
 {
     "plantuml.diagramsRoot": "diagrams",
-    "plantuml.exportFormat": "svg",
     "plantuml.exportOutDir": "diagrams",
+    "plantuml.exportFormat": "svg",
+    "plantuml.exportSubFolder": false,
     "markdownlint.config": {
+        "MD033": false,
         "MD034": false,
         "MD040": false
     }
