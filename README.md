@@ -1,22 +1,16 @@
 # ドキッ! 脆弱性だらけの Web アプリ
 
-|  project  |  description  |  method  |
+Web セキュリティの脆弱性を**体験しながら学ぶ**ハンズオン教材です。
+
+意図的に脆弱性を埋め込んだアプリ（`badchat/`）と、修正済みのアプリ（`goodchat/`）を比較することで、攻撃と防御の両面を理解できます。
+
+## プロジェクト一覧
+
+| プロジェクト | 説明 | 学べる脆弱性 |
 | ---- | ---- | ---- |
-|  [badchat](badchat/README.md)  |  チャットアプリと罠サイト  |  XSSによるセッションハイジャック  |
+| [badchat](badchat/) | 脆弱なチャットアプリ + 罠サイト | XSS によるセッションハイジャック |
+| [goodchat](goodchat/) | 修正済みチャットアプリ | 上記の対策方法 |
 
-<!-- ## bad-library
+## はじめかた
 
-電子書籍の貸出管理
-
-- SQLi
-
-## bad-channel
-
-オンライン掲示板
-
-- XSS -->
-
-<!-- ## testing
-
-- PlayWright  
-  脆弱性診断 -->
+[badchat/README.md](badchat/README.md) のハンズオン手順に従ってください。

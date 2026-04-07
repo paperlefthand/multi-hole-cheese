@@ -37,7 +37,8 @@ const sock = new WebSocket("ws://badchat.ws.example.com/");
 sock.addEventListener("message", (e) => {
   if (e.data !== "ping") {
     // const data = e.data.split(":").map((s) => s.trim());
-    const data = e.data.split(":");
+    const idx = e.data.indexOf(":");
+    const data = [e.data.slice(0, idx), e.data.slice(idx + 1)];
     if (data[0] === user_name) {
       addMyMessage(data[1]);
     } else {

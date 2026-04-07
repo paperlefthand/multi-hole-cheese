@@ -1,0 +1,17 @@
+/* .container {
+  max-width: 600px;
+} */
+
+/* #chat {
+  margin: 0 auto;
+} */
+
+.message-icon {
+  width: 48px;
+  height: 48px;
+}
+
+.message-text {
+  max-width: 70%;
+  border-radius: 1rem;
+}

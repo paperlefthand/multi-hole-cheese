@@ -1,4 +1,4 @@
-<?
+<?php
 function setToken()
 {
     $token = sha1(uniqid(mt_rand(), true));
