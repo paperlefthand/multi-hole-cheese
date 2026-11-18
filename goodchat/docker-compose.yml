@@ -1,4 +1,4 @@
-version: "3"
+name: goodchat
 services:
   nginx:
     image: nginx:alpine

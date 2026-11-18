@@ -14,3 +14,24 @@ Web セキュリティの脆弱性を**体験しながら学ぶ**ハンズオン
 ## はじめかた
 
 [badchat/README.md](badchat/README.md) のハンズオン手順に従ってください。
+
+## 開発環境
+
+リポジトリは WSL 内に clone し、Docker も WSL 内の Docker Engine を使います（Docker Desktop は使いません）。
+
+```bash
+git clone git@github.com:paperlefthand/multi-hole-cheese.git ~/garage/multi-hole-cheese
+code ~/garage/multi-hole-cheese
+```
+
+ハンズオンごとに VS Code のワークスペースと Dev Container を用意しています。
+
+| ハンズオン | ワークスペース | Dev Container | 公開ポート |
+| ---- | ---- | ---- | ---- |
+| badchat | `badchat.code-workspace` | `.devcontainer/badchat/` | 80, 8080 |
+| goodchat | `goodchat.code-workspace` | `.devcontainer/goodchat/` | 81, 8081 |
+
+ワークスペースを開いて「Dev Containers: Reopen in Container」を実行し、同じ名前の構成を選んでください。
+Dev Container は `.devcontainer/compose.devcontainer.yml` を各ハンズオンの `docker-compose.yml` に重ねて、作業用の `workspace` コンテナを追加します。
+
+改行コードは `.gitattributes` で LF に統一しています（`*.ps1` のみ CRLF）。

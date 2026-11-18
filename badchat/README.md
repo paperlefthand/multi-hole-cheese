@@ -31,7 +31,7 @@ BadChat は**意図的に脆弱性を埋め込んだ**リアルタイムチャ�
 ├───────────────────────────────────────┤
 │ back-end ネットワーク                 │
 ├───────────────────────────────────────┤
-│ MySQL 5.7     │ Adminer (:8080)       │
+│ MySQL 8.0     │ Adminer (:8080)       │
 │ ユーザー管理  │ DB管理UI              │
 └───────────────┴───────────────────────┘
 ```
@@ -41,11 +41,13 @@ BadChat は**意図的に脆弱性を埋め込んだ**リアルタイムチャ�
 ## 前提条件
 
 - WSL2（Ubuntu 等）
-- Docker Engine（WSL2 上にインストール）
+- Docker Engine（WSL2 上にインストール。Docker Desktop は使いません）
+- VS Code + 拡張機能 WSL / Dev Containers（Dev Container で作業する場合）
 - テキストエディタ（Windows の hosts ファイル編集用）
 - Web ブラウザ（Chrome 推奨、Windows 側で実行）
 
-> **注意**: `docker compose` コマンドはすべて **WSL 上**で実行してください。
+> **注意**: リポジトリは **WSL のファイルシステム内**（例: `~/garage/multi-hole-cheese`）に clone し、
+> `docker compose` コマンドはすべて **WSL 上**で実行してください。
 > ブラウザは **Windows 側**で開きます（WSL2 のポートは自動的に Windows へ転送されます）。
 
 ## セットアップ
@@ -75,7 +77,22 @@ cp .env.sample .env
 
 ### 3. コンテナの起動
 
-WSL 上で実行してください:
+次のどちらかで起動します。
+
+#### A. VS Code の Dev Container で起動する（推奨）
+
+1. WSL 上でリポジトリを VS Code で開く: `code ~/garage/multi-hole-cheese`
+2. 「ファイル > ファイルでワークスペースを開く」で `badchat.code-workspace` を開く
+3. コマンドパレットから「Dev Containers: Reopen in Container」を実行し、`badchat` を選ぶ
+
+`badchat/docker-compose.yml` の全サービスに加えて、作業用の `workspace` コンテナが WSL の Docker 上で起動し、VS Code はそのコンテナに接続します。
+VS Code のウィンドウを閉じるとコンテナも停止します。
+
+- ターミナルでは `curl http://badchat.example.com/` のように、ブラウザと同じホスト名でアクセスできます
+- 「タスクの実行」から `badchat: logs` / `badchat: mysql` / `badchat: php lint` などを使えます
+- SQLTools 拡張に DB 接続 `badchat db` が登録されています
+
+#### B. WSL のターミナルで起動する
 
 ```bash
 cd badchat
@@ -166,7 +183,10 @@ echo $_GET['name'];
 
 ### 起動方法
 
-WSL 上で実行してください:
+Dev Container の場合は `goodchat.code-workspace` を開き、「Dev Containers: Reopen in Container」で `goodchat` を選びます。
+badchat と同時に起動できます（別ウィンドウで開いてください）。
+
+ターミナルの場合は WSL 上で実行してください:
 
 ```bash
 cd goodchat

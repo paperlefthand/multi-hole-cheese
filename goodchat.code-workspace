@@ -1,0 +1,80 @@
+{
+  // goodchat ハンズオン用ワークスペース
+  // WSL 上で開き、「Dev Containers: Reopen in Container」で "goodchat" を選ぶとコンテナ内で作業できる。
+  "folders": [
+    { "name": "goodchat", "path": "goodchat" },
+    { "name": "diagrams", "path": "diagrams/badchat" }
+  ],
+  "settings": {
+    "window.title": "goodchat — ${activeEditorShort}${separator}${remoteName}",
+    "files.eol": "\n",
+    "files.exclude": {
+      "**/node_modules": true
+    },
+    "plantuml.diagramsRoot": "",
+    "plantuml.exportOutDir": ".",
+    "plantuml.exportFormat": "svg",
+    "plantuml.exportSubFolder": false,
+    "markdownlint.config": {
+      "MD033": false,
+      "MD034": false,
+      "MD040": false
+    }
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "options": {
+      "cwd": "${workspaceFolder:goodchat}"
+    },
+    "tasks": [
+      {
+        "label": "goodchat: ps",
+        "detail": "コンテナの状態を表示",
+        "type": "shell",
+        "command": "docker compose -p goodchat ps",
+        "problemMatcher": []
+      },
+      {
+        "label": "goodchat: logs",
+        "detail": "全サービスのログを追跡",
+        "type": "shell",
+        "command": "docker compose -p goodchat logs -f --tail=100",
+        "isBackground": true,
+        "problemMatcher": []
+      },
+      {
+        "label": "goodchat: restart app",
+        "detail": "nginx / php-fpm / ws を再起動 (設定ファイル変更後に)",
+        "type": "shell",
+        "command": "docker compose -p goodchat restart nginx php-fpm ws",
+        "problemMatcher": []
+      },
+      {
+        "label": "goodchat: mysql",
+        "detail": "db コンテナに mysql クライアントで接続 (Dev Container 内のみ)",
+        "type": "shell",
+        "command": "mysql -h db -u user1 -ppassword1 badchat",
+        "problemMatcher": []
+      },
+      {
+        "label": "goodchat: php lint",
+        "detail": "html/ 配下の PHP を構文チェック (Dev Container 内のみ)",
+        "type": "shell",
+        "command": "find html -name '*.php' -print0 | xargs -0 -n1 php -l",
+        "problemMatcher": []
+      }
+    ]
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-vscode-remote.remote-wsl",
+      "ms-vscode-remote.remote-containers",
+      "ms-azuretools.vscode-containers",
+      "bmewburn.vscode-intelephense-client",
+      "jebbs.plantuml",
+      "davidanson.vscode-markdownlint",
+      "mtxr.sqltools",
+      "mtxr.sqltools-driver-mysql"
+    ]
+  }
+}

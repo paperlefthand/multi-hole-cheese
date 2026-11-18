@@ -1,0 +1,49 @@
+// goodchat ハンズオン用 Dev Container
+// WSL 内の Docker で ../../goodchat/docker-compose.yml の全サービスと作業用コンテナ (workspace) を起動する。
+// 使い方: WSL で開いたリポジトリから goodchat.code-workspace を開き、
+//         「Dev Containers: Reopen in Container」で "goodchat" を選ぶ。
+{
+  "name": "goodchat",
+  "dockerComposeFile": [
+    "../../goodchat/docker-compose.yml",
+    "../compose.devcontainer.yml"
+  ],
+  "service": "workspace",
+  "workspaceFolder": "/workspaces/multi-hole-cheese",
+  "shutdownAction": "stopCompose",
+  "remoteUser": "vscode",
+  "features": {
+    // コンテナ内から WSL の Docker を操作する (タスクの ps / logs / restart 用)
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+      "moby": false
+    }
+  },
+  // ポートは docker-compose.yml の ports で WSL に公開済み (Windows の localhost から到達できる)
+  //   チャット: http://badchat.example.com:81
+  //   Adminer : http://localhost:8081
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "bmewburn.vscode-intelephense-client",
+        "ms-azuretools.vscode-containers",
+        "jebbs.plantuml",
+        "davidanson.vscode-markdownlint",
+        "mtxr.sqltools",
+        "mtxr.sqltools-driver-mysql"
+      ],
+      "settings": {
+        "sqltools.connections": [
+          {
+            "name": "goodchat db",
+            "driver": "MySQL",
+            "server": "db",
+            "port": 3306,
+            "database": "badchat",
+            "username": "user1",
+            "password": "password1"
+          }
+        ]
+      }
+    }
+  }
+}

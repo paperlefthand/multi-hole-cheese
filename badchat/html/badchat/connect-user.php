@@ -1,5 +1,5 @@
 <?php
-$dsn = 'mysql:dbname=badchat;host=badchat-db';
+$dsn = 'mysql:dbname=badchat;host=db';
 $user = 'user1';
 $password = 'password1';
 
