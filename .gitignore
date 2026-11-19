@@ -1,1 +1,36 @@
 /bad-library
+
+# ---- 秘密情報 ----
+# Slack トークンなど (各ハンズオンの .env.sample をコピーして使う)
+.env
+.env.*
+!.env.sample
+
+# ---- 依存パッケージ / ビルド成果物 ----
+node_modules/
+vendor/
+*.log
+
+# ---- エディタ ----
+# 共有する VS Code 設定だけ管理し、個人の設定は無視する
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/extensions.json
+# workspace ファイルは廃止 (リポジトリのルートをフォルダで開く)。個人用に作ったものは管理しない
+*.code-workspace
+.idea/
+*.swp
+*~
+
+# ---- Claude Code ----
+# 一時 worktree と個人の許可設定 (共有したい設定は .claude/settings.json に書く)
+.claude/worktrees/
+.claude/settings.local.json
+
+# ---- OS ----
+.DS_Store
+Thumbs.db
+desktop.ini
+Zone.Identifier
+*:Zone.Identifier

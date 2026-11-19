@@ -1,0 +1,24 @@
+@startuml network
+' x = 0: chat/bad, 1: chat/good
+
+nwdiag {
+    network bridge {
+        address = "0.0.0.0/0";
+        nginx [address = "localhost:810x"];
+        adminer [address = "localhost:818x"];
+    }
+    network front-end {
+        address = "";
+        nginx [address = ""];
+        ws [address = "ws:5000"];
+        php-fpm [address = "php-fpm:9000"];
+    }
+    network back-end {
+        address = "";
+        php-fpm [address = ""];
+        adminer [address = ""];
+        db [address = "db:3306"];
+    }
+}
+
+@enduml

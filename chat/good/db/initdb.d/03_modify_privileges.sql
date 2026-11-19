@@ -1,0 +1,2 @@
+GRANT ALL PRIVILEGES ON badchat.* TO 'user1'@'%';
+-- FLUSH PRIVILEGES;

@@ -1,0 +1,8 @@
+# WSL / コンテナにバインドマウントするため、改行は LF に統一する
+* text=auto eol=lf
+
+# Windows 側で実行するスクリプトだけは CRLF
+*.ps1 text eol=crlf
+
+*.png binary
+*.jpg binary

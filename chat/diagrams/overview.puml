@@ -1,0 +1,53 @@
+@startuml overview
+' 攻撃シナリオの概要図 (詳細なシーケンスは scenario.puml)
+' 書き出し: VS Code の PlantUML 拡張で「Export Current Diagram」(SVG)
+' Graphviz がない環境でも描けるよう、内蔵のレイアウトエンジンを使う
+!pragma layout smetana
+
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName sans-serif
+skinparam defaultFontSize 14
+skinparam ArrowColor #333333
+skinparam ArrowThickness 1.5
+skinparam ArrowFontSize 18
+skinparam rectangle {
+  BackgroundColor #FFFFFF
+  BorderColor #333333
+}
+skinparam rectangle<<person>> {
+  BorderColor #FFFFFF
+  FontStyle bold
+  StereotypeFontSize 0
+}
+skinparam legend {
+  BackgroundColor #FFFFFF
+  BorderColor #FFFFFF
+  FontSize 15
+}
+
+rectangle "<img:images/alice.png{scale=0.55}>\nAlice" <<person>> as alice
+rectangle "<img:images/bob.png{scale=0.45}>\nBob" <<person>> as bob
+rectangle "<img:images/attacker.png{scale=1.1}>\nAttacker" <<person>> as attacker
+
+rectangle "  **チャットサイト**  " as chat
+rectangle "  **罠サイト**  " as trap
+
+alice -down-> chat : ①
+bob -down-> chat : ①
+attacker -down-> bob : ② ✉
+bob -down-> trap : ③
+trap -up-> attacker : ④
+attacker -down-> chat : ⑤
+
+alice -[hidden]right- bob
+chat -[hidden]right- trap
+
+legend bottom left
+  **① AliceとBobがチャットサイトにログイン**
+  **② Attackerが罠サイトを設置し, そこへ誘導するメールをBobに送る**
+  **③ Bobがうっかりリンクをクリックし罠サイトを訪問**
+  **④ AttackerがBobのチャットログイン情報を盗む(攻撃成功)**
+  **⑤ AttackerがBobに成りすましてAliceと会話**
+endlegend
+
+@enduml

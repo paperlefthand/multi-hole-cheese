@@ -1,0 +1,84 @@
+name: goodchat
+services:
+  nginx:
+    image: nginx:alpine
+    volumes:
+      - ./html:/usr/share/nginx/html
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "8101:80"
+    depends_on:
+      - php-fpm
+    networks:
+      front-end:
+        # コンテナ内 (Dev Container の workspace など) からも同じホスト名で届くようにする
+        #   例: curl http://goodchat.example.com/   (コンテナ内ではポート指定なし = 80)
+        aliases:
+          - goodchat.example.com
+          - ws.goodchat.example.com
+          - trap.goodchat.example.com
+
+  php-fpm:
+    build:
+      context: ./php-fpm
+    volumes:
+      - ./php-fpm/php.ini:/usr/local/etc/php/conf.d/php.ini
+      - ./html:/usr/share/nginx/html
+    environment:
+      SLACK_CHANNEL_ID: "${SLACK_CHANNEL_ID}"
+      SLACK_APP_TOKEN: "${SLACK_APP_TOKEN}"
+    expose:
+      - "9000"
+    depends_on:
+      - ws
+      - db
+    networks:
+      - front-end
+      - back-end
+
+  ws:
+    build:
+      context: ./ws
+    volumes:
+      - ./ws/server.js:/usr/src/app/server.js
+    command: npm start
+    expose:
+      - "5000"
+    networks:
+      - front-end
+    
+  db:
+    build:
+      context: ./db
+    volumes:
+      - dbdata-good:/var/lib/mysql
+      - ./db/my.cnf:/etc/mysql/my.cnf
+      - ./db/initdb.d:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_DATABASE: "badchat"
+      MYSQL_USER: "user1"
+      MYSQL_PASSWORD: "password1"
+      MYSQL_ROOT_HOST: localhost
+      MYSQL_RANDOM_ROOT_PASSWORD: yes
+      TZ: "Asia/Tokyo"
+    expose:
+      - "3306"
+    networks:
+      - back-end
+
+  adminer:
+    image: adminer:4
+    ports:
+      - 8181:8080
+    networks:
+      - back-end
+
+networks:
+  front-end:
+    driver: bridge
+  back-end:
+    driver: bridge
+
+volumes:
+  dbdata-good:
