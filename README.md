@@ -34,8 +34,8 @@ Web セキュリティの脆弱性を**体験しながら学ぶ**ハンズオン
 リポジトリは WSL 内に clone し、Docker も WSL 内の Docker Engine を使います（Docker Desktop は使いません）。
 
 ```bash
-git clone git@github.com:paperlefthand/multi-hole-cheese.git ~/garage/multi-hole-cheese
-code ~/garage/multi-hole-cheese
+git clone git@github.com:paperlefthand/multi-hole-cheese.git ~/multi-hole-cheese
+code ~/multi-hole-cheese
 ```
 
 リポジトリのルートを VS Code で開き、「Dev Containers: Reopen in Container」で対象のハンズオンを選んでください。

@@ -5,6 +5,8 @@
 BadChat は**意図的に脆弱性を埋め込んだ**リアルタイムチャットアプリケーションです。
 攻撃者が Reflected XSS を利用してセッション Cookie を窃取し、被害者になりすます一連の流れを体験できます。
 
+<img src="../diagrams/overview.svg" alt="攻撃シナリオの概要" width=400>
+
 ### 学習目標
 
 - Reflected XSS の仕組みと危険性を理解する
@@ -45,7 +47,7 @@ BadChat は**意図的に脆弱性を埋め込んだ**リアルタイムチャ�
 - VS Code + 拡張機能 WSL / Dev Containers（Dev Container で作業する場合）
 - Google Chrome（Windows 側で実行）
 
-> **注意**: リポジトリは **WSL のファイルシステム内**（例: `~/garage/multi-hole-cheese`）に clone し、
+> **注意**: リポジトリは **WSL のファイルシステム内**（例: `~/multi-hole-cheese`）に clone し、
 > `docker compose` コマンドはすべて **WSL 上**で実行してください。
 > ブラウザは **Windows 側**で開きます（WSL2 のポートは自動的に Windows へ転送されます）。
 
@@ -75,7 +77,7 @@ cp .env.sample .env
 
 #### A. VS Code の Dev Container で起動する（推奨）
 
-1. WSL 上でリポジトリのルートを VS Code で開く: `code ~/garage/multi-hole-cheese`
+1. WSL 上でリポジトリのルートを VS Code で開く: `code ~/multi-hole-cheese`
 2. コマンドパレットから「Dev Containers: Reopen in Container」を実行し、`badchat` を選ぶ
 
 `chat/bad/docker-compose.yml` の全サービスに加えて、作業用の `workspace` コンテナが WSL の Docker 上で起動し、VS Code はそのコンテナに接続します。
@@ -97,7 +99,7 @@ docker compose up -d
 Windows の PowerShell で `launch_chrome.ps1` を実行して Chrome を起動します。
 
 ```powershell
-# 例: \\wsl$\Ubuntu\home\<user>\garage\multi-hole-cheese\chat\bad\launch_chrome.ps1
+# 例: \\wsl$\Ubuntu\home\<user>\multi-hole-cheese\chat\bad\launch_chrome.ps1
 powershell -ExecutionPolicy Bypass -File .\launch_chrome.ps1
 ```
 

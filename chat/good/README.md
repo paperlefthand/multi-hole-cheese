@@ -4,7 +4,7 @@
 
 ## 攻撃のシナリオ
 
-<img src="scenario.png" alt="攻撃のシナリオ" width=300>
+<img src="../diagrams/overview.svg" alt="攻撃シナリオの概要" width=400>
 
 ## ネットワーク図
 
