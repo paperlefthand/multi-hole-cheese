@@ -1,0 +1,12 @@
+{
+    "recommendations": [
+        "ms-vscode-remote.remote-wsl",
+        "ms-vscode-remote.remote-containers",
+        "ms-azuretools.vscode-containers",
+        "bmewburn.vscode-intelephense-client",
+        "jebbs.plantuml",
+        "davidanson.vscode-markdownlint",
+        "mtxr.sqltools",
+        "mtxr.sqltools-driver-mysql"
+    ]
+}

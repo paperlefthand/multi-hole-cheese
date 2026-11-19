@@ -1,6 +1,11 @@
 {
-    "plantuml.diagramsRoot": "diagrams",
-    "plantuml.exportOutDir": "diagrams",
+    "files.eol": "\n",
+    "files.exclude": {
+        "**/node_modules": true
+    },
+    // .puml と同じディレクトリに .svg を書き出す (例: chat/diagrams/network.puml -> chat/diagrams/network.svg)
+    "plantuml.diagramsRoot": "",
+    "plantuml.exportOutDir": ".",
     "plantuml.exportFormat": "svg",
     "plantuml.exportSubFolder": false,
     "markdownlint.config": {

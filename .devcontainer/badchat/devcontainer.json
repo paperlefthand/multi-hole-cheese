@@ -1,17 +1,22 @@
-// badchat ハンズオン用 Dev Container
-// WSL 内の Docker で ../../badchat/docker-compose.yml の全サービスと作業用コンテナ (workspace) を起動する。
-// 使い方: WSL で開いたリポジトリから badchat.code-workspace を開き、
+// chat/bad ハンズオン用 Dev Container
+// WSL 内の Docker で ../../chat/bad/docker-compose.yml の全サービスと作業用コンテナ (workspace) を起動する。
+// 使い方: WSL で開いたリポジトリのルートを VS Code で開き、
 //         「Dev Containers: Reopen in Container」で "badchat" を選ぶ。
 {
   "name": "badchat",
   "dockerComposeFile": [
-    "../../badchat/docker-compose.yml",
+    "../../chat/bad/docker-compose.yml",
     "../compose.devcontainer.yml"
   ],
   "service": "workspace",
   "workspaceFolder": "/workspaces/multi-hole-cheese",
   "shutdownAction": "stopCompose",
   "remoteUser": "vscode",
+  // .vscode/tasks.json のタスクが対象ハンズオンを判別するための環境変数
+  "containerEnv": {
+    "APP_DIR": "chat/bad",
+    "APP_DB": "badchat"
+  },
   "features": {
     // コンテナ内から WSL の Docker を操作する (タスクの ps / logs / restart 用)
     "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
@@ -19,8 +24,8 @@
     }
   },
   // ポートは docker-compose.yml の ports で WSL に公開済み (Windows の localhost から到達できる)
-  //   チャット: http://badchat.example.com
-  //   Adminer : http://localhost:8080
+  //   チャット: http://badchat.example.com:8100  (chat/bad/launch_chrome.ps1 で起動した Chrome から)
+  //   Adminer : http://localhost:8180
   "customizations": {
     "vscode": {
       "extensions": [

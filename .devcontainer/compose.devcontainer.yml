@@ -1,26 +1,19 @@
-# Dev Container 用の Compose オーバーライド (badchat / goodchat 共通)
+# Dev Container 用の Compose オーバーライド (全ハンズオン共通)
 #
-# 各ハンズオンの docker-compose.yml と組み合わせて使う。
-# 相対パスは 1 つ目の Compose ファイルがあるディレクトリ (badchat/ や goodchat/) が基準になる。
+# 各ハンズオンの docker-compose.yml (<app>/<variant>/docker-compose.yml) と組み合わせて使う。
+# 相対パスは 1 つ目の Compose ファイルがあるディレクトリ (例: chat/bad/) が基準になるため、
+# ハンズオンは必ずリポジトリ直下から 2 階層目に置くこと。
+#
+# nginx のホスト名エイリアスは各ハンズオンの docker-compose.yml 側で定義している。
 services:
   # VS Code が接続する作業用コンテナ
   workspace:
     build:
-      context: ../.devcontainer
+      context: ../../.devcontainer
       dockerfile: Dockerfile
     volumes:
-      - ..:/workspaces/multi-hole-cheese:cached
+      - ../..:/workspaces/multi-hole-cheese:cached
     command: sleep infinity
     networks:
       - front-end
       - back-end
-
-  # コンテナ内からもブラウザと同じホスト名でアクセスできるようにする
-  #   例: curl http://badchat.example.com/
-  nginx:
-    networks:
-      front-end:
-        aliases:
-          - badchat.example.com
-          - badchat.ws.example.com
-          - badchat.trap.example.com

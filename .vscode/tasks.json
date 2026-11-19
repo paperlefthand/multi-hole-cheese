@@ -1,0 +1,45 @@
+// ハンズオン用タスク (Dev Container 内専用)
+// 対象のハンズオンは .devcontainer/<name>/devcontainer.json の containerEnv で決まる。
+//   APP_DIR: ハンズオンのディレクトリ (例: chat/bad)
+//   APP_DB : DB 名
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "app: ps",
+            "detail": "コンテナの状態を表示",
+            "type": "shell",
+            "command": "[ -n \"$APP_DIR\" ] || { echo 'Dev Container 内で実行してください'; exit 1; }; cd \"$APP_DIR\" && docker compose ps",
+            "problemMatcher": []
+        },
+        {
+            "label": "app: logs",
+            "detail": "全サービスのログを追跡",
+            "type": "shell",
+            "command": "[ -n \"$APP_DIR\" ] || { echo 'Dev Container 内で実行してください'; exit 1; }; cd \"$APP_DIR\" && docker compose logs -f --tail=100",
+            "isBackground": true,
+            "problemMatcher": []
+        },
+        {
+            "label": "app: restart app",
+            "detail": "nginx / php-fpm / ws を再起動 (設定ファイル変更後に)",
+            "type": "shell",
+            "command": "[ -n \"$APP_DIR\" ] || { echo 'Dev Container 内で実行してください'; exit 1; }; cd \"$APP_DIR\" && docker compose restart nginx php-fpm ws",
+            "problemMatcher": []
+        },
+        {
+            "label": "app: mysql",
+            "detail": "db コンテナに mysql クライアントで接続",
+            "type": "shell",
+            "command": "[ -n \"$APP_DB\" ] || { echo 'Dev Container 内で実行してください'; exit 1; }; mysql -h db -u user1 -ppassword1 \"$APP_DB\"",
+            "problemMatcher": []
+        },
+        {
+            "label": "app: php lint",
+            "detail": "html/ 配下の PHP を構文チェック",
+            "type": "shell",
+            "command": "[ -n \"$APP_DIR\" ] || { echo 'Dev Container 内で実行してください'; exit 1; }; find \"$APP_DIR/html\" -name '*.php' -print0 | xargs -0 -n1 php -l",
+            "problemMatcher": []
+        }
+    ]
+}
